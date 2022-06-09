@@ -1,22 +1,22 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "maize-tech/laravel-prunable-fields",
+    "description": "Laravel Prunable Fields",
     "keywords": [
-        ":vendor_name",
+        "maize-tech",
         "laravel",
-        ":package_slug"
+        "laravel-prunable-fields"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/maize-tech/laravel-prunable-fields",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Riccardo Dalla Via",
+            "email": "riccardo.dallavia@h-farm.com",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.0",
         "spatie/laravel-package-tools": "^1.9.2",
         "illuminate/contracts": "^9.0"
     },
@@ -35,13 +35,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Maize\\PrunableFields\\": "src",
+            "Maize\\PrunableFields\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Maize\\PrunableFields\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -56,10 +56,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Maize\\PrunableFields\\PrunableFieldsServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "PrunableFields": "Maize\\PrunableFields\\Facades\\PrunableFields"
             }
         }
     },

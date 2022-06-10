@@ -20,3 +20,9 @@ test('should print the amount of prunable records', function (PrunableUser $mode
         '--pretend' => true,
     ])->expectsOutput("1 [{$model->getMorphClass()}] records will be pruned.");
 })->with('user_with_prunable_fields');
+
+test('should print no models found with empty list', function () {
+    pruneFields([
+        //
+    ])->expectsOutput("No prunable models found.");
+});

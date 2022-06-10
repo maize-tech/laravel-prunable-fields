@@ -6,11 +6,10 @@ use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Str;
 use Maize\PrunableFields\Events\ModelsFieldsPruned;
 use Maize\PrunableFields\MassPrunableFields;
 use Maize\PrunableFields\PrunableFields;
-use Symfony\Component\Finder\Finder;
+use Maize\PrunableFields\Support\Config;
 
 class PruneFieldsCommand extends Command
 {
@@ -71,27 +70,11 @@ class PruneFieldsCommand extends Command
 
         $except = $this->option('except');
 
-        return collect((new Finder())->in($this->getDefaultPath())->files()->name('*.php'))
-            ->map(function ($model) {
-                $namespace = $this->laravel->getNamespace();
-
-                return $namespace.str_replace(
-                    ['/', '.php'],
-                    ['\\', ''],
-                    Str::after($model->getRealPath(), realpath(app_path()).DIRECTORY_SEPARATOR)
-                );
-            })
-            ->when(! empty($except), function ($models) use ($except) {
-                return $models->reject(fn ($model) => in_array($model, $except));
-            })
-            ->filter(fn ($model) => $this->isPrunable($model))
+        return collect(Config::getPrunableModels())
+            ->reject(fn ($model) => in_array($model, $except))
             ->filter(fn ($model) => class_exists($model))
+            ->filter(fn ($model) => $this->isPrunable($model))
             ->values();
-    }
-
-    protected function getDefaultPath(): string
-    {
-        return app_path('Models');
     }
 
     protected function isPrunable(string $model): bool

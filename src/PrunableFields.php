@@ -4,11 +4,12 @@ namespace Maize\PrunableFields;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use LogicException;
 use Maize\PrunableFields\Events\ModelsFieldsPruned;
 
 trait PrunableFields
 {
+    abstract public function prunableFields(): Builder;
+
     public function prunable(): array
     {
         return property_exists($this, 'prunable')
@@ -37,19 +38,23 @@ trait PrunableFields
         return $total;
     }
 
-    public function prunableFields(): Builder
-    {
-        throw new LogicException('Please implement the prunable method on your model.');
-    }
-
     public function pruneFields(): bool
     {
         $this->pruningFields();
 
-        return $this->update($this->prunable());
+        $total = $this->update($this->prunable());
+
+        $this->prunedFields();
+
+        return $total;
     }
 
     protected function pruningFields(): void
+    {
+        //
+    }
+
+    protected function prunedFields()
     {
         //
     }

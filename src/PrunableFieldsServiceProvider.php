@@ -12,6 +12,7 @@ class PrunableFieldsServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-prunable-fields')
+            ->hasConfigFile()
             ->hasCommand(PruneFieldsCommand::class);
     }
 }

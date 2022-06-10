@@ -5,11 +5,12 @@ namespace Maize\PrunableFields;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use LogicException;
 use Maize\PrunableFields\Events\ModelsFieldsPruned;
 
 trait MassPrunableFields
 {
+    abstract public function prunableFields(): Builder;
+
     public function prunable(): array
     {
         return property_exists($this, 'prunable')
@@ -36,10 +37,5 @@ trait MassPrunableFields
             });
 
         return $total;
-    }
-
-    public function prunableFields(): Builder
-    {
-        throw new LogicException('Please implement the prunable method on your model.');
     }
 }

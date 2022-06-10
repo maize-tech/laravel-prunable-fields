@@ -20,7 +20,7 @@ class MassPrunableUser extends Model
     ];
 
     protected $dispatchesEvents = [
-        'updated' => UserUpdatedEvent::class
+        'updated' => UserUpdatedEvent::class,
     ];
 
     protected $prunable = [

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
-use InvalidArgumentException;
 use Maize\PrunableFields\Events\ModelsFieldsPruned;
 use Maize\PrunableFields\MassPrunableFields;
 use Maize\PrunableFields\PrunableFields;
@@ -17,6 +16,7 @@ class PruneFieldsCommand extends Command
 {
     protected $signature = 'model:prune-fields
                                 {--model=* : Class names of the models to be pruned}
+                                {--except=* : Class names of the models to be excluded from pruning}
                                 {--chunk=1000 : The number of models to retrieve per chunk of models to be pruned}
                                 {--pretend : Display the number of prunable records found instead of pruning them}';
 
@@ -71,10 +71,6 @@ class PruneFieldsCommand extends Command
 
         $except = $this->option('except');
 
-        if (! empty($models) && ! empty($except)) {
-            throw new InvalidArgumentException('The --models and --except options cannot be combined.');
-        }
-
         return collect((new Finder())->in($this->getDefaultPath())->files()->name('*.php'))
             ->map(function ($model) {
                 $namespace = $this->laravel->getNamespace();
@@ -91,6 +87,11 @@ class PruneFieldsCommand extends Command
             ->filter(fn ($model) => $this->isPrunable($model))
             ->filter(fn ($model) => class_exists($model))
             ->values();
+    }
+
+    protected function getDefaultPath(): string
+    {
+        return app_path('Models');
     }
 
     protected function isPrunable(string $model): bool

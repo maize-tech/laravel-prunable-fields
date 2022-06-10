@@ -54,7 +54,7 @@ trait PrunableFields
         //
     }
 
-    protected function prunedFields()
+    protected function prunedFields(): void
     {
         //
     }

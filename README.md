@@ -95,7 +95,7 @@ class User extends Model
         logger()->warning("User {$this->getKey()} is being pruned");
     }
 
-    protected function prunedFields()
+    protected function prunedFields(): void
     {
         logger()->warning("User {$this->getKey()} has been pruned");
     }

@@ -7,7 +7,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/maize-tech/laravel-prunable-fields.svg?style=flat-square)](https://packagist.org/packages/maize-tech/laravel-prunable-fields)
 
 This package allows you to clean model fields with an easy command.
-The feature is highly inspired by Laravel's Prunable core feature, allowing you to easily adapt all your existing models.
+The feature is highly inspired by Laravel's Prunable core feature, and allows you to easily adapt all your existing models.
 
 ## Installation
 

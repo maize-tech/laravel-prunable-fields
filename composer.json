@@ -17,8 +17,11 @@
     ],
     "require": {
         "php": "^8.0",
-        "spatie/laravel-package-tools": "^1.9.2",
-        "illuminate/contracts": "^9.0"
+        "illuminate/console": "^9.0",
+        "illuminate/database": "^9.0",
+        "illuminate/events": "^9.0",
+        "illuminate/support": "^9.0",
+        "spatie/laravel-package-tools": "^1.9.2"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.8",
@@ -57,10 +60,7 @@
         "laravel": {
             "providers": [
                 "Maize\\PrunableFields\\PrunableFieldsServiceProvider"
-            ],
-            "aliases": {
-                "PrunableFields": "Maize\\PrunableFields\\Facades\\PrunableFields"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",

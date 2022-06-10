@@ -3,11 +3,12 @@
 namespace Maize\PrunableFields;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use LogicException;
 use Maize\PrunableFields\Events\ModelsFieldsPruned;
 
-trait PrunableFields
+trait MassPrunableFields
 {
     public function prunable(): array
     {
@@ -26,10 +27,10 @@ trait PrunableFields
                 in_array(SoftDeletes::class, class_uses_recursive(get_class($this))),
                 fn ($query) => $query->withTrashed()
             )
-            ->chunkById($chunkSize, function ($models) use (&$total) {
-                $models->each->pruneFields();
-
-                $total += $models->count();
+            ->chunkById($chunkSize, function (Collection $models) use (&$total) {
+                $total += $models
+                    ->toQuery()
+                    ->update($this->prunable());
 
                 ModelsFieldsPruned::dispatch(static::class, $total);
             });
@@ -40,17 +41,5 @@ trait PrunableFields
     public function prunableFields(): Builder
     {
         throw new LogicException('Please implement the prunable method on your model.');
-    }
-
-    public function pruneFields(): bool
-    {
-        $this->pruningFields();
-
-        return $this->update($this->prunable());
-    }
-
-    protected function pruningFields(): void
-    {
-        //
     }
 }

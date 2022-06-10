@@ -2,7 +2,7 @@
 
 namespace Maize\PrunableFields;
 
-use Maize\PrunableFields\Commands\PrunableFieldsCommand;
+use Maize\PrunableFields\Commands\PruneFieldsCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -12,7 +12,6 @@ class PrunableFieldsServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-prunable-fields')
-            ->hasConfigFile()
-            ->hasCommand(PrunableFieldsCommand::class);
+            ->hasCommand(PruneFieldsCommand::class);
     }
 }

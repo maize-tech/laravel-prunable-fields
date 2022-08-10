@@ -4,18 +4,22 @@ namespace Maize\PrunableFields\Support;
 
 class Config
 {
-    protected static \Closure $callback;
+    /**
+     * @var callable|null
+     */
+    protected static $callback;
 
-    public static function resolvePrunableModelsUsing(\Closure $callback)
+    public static function resolvePrunableModelsUsing(?callable $callback): void
     {
         static::$callback = $callback;
     }
 
     public static function getPrunableModels(): array
     {
-        if(isset(static::$callback)) {
+        if (is_callable(static::$callback)) {
             return call_user_func(static::$callback);
         }
+
         return config('prunable-fields.models', []);
     }
 }

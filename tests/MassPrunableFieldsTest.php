@@ -56,17 +56,3 @@ test('should fire ModelsFieldsPruned event with mass prunable model', function (
         fn (ModelsFieldsPruned $e) => $e->count === 1 && $e->model === MassPrunableUser::class
     );
 })->with('user_with_mass_prunable_fields');
-
-test('should allow the prunable models to be overridden at runtime', function(MassPrunableUser $model) {
-    \Maize\PrunableFields\Support\Config::resolvePrunableModelsUsing(fn() => [MassPrunableUser::class]);
-    
-    Event::fake();
-
-    pruneFields([]);
-
-    Event::assertDispatched(
-        ModelsFieldsPruned::class,
-        fn (ModelsFieldsPruned $e) => $e->count === 1 && $e->model === MassPrunableUser::class
-    );
-
-})->with('user_with_mass_prunable_fields');

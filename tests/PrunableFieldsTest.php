@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Maize\PrunableFields\Events\ModelsFieldsPruned;
+use Maize\PrunableFields\Support\Config;
 use Maize\PrunableFields\Tests\Events\UserUpdatedEvent;
 use Maize\PrunableFields\Tests\Models\PrunableUser;
 
@@ -66,4 +67,19 @@ test('should fire ModelsFieldsPruned event with prunable model', function (Pruna
         ModelsFieldsPruned::class,
         fn (ModelsFieldsPruned $e) => $e->count === 1 && $e->model === PrunableUser::class
     );
+})->with('user_with_prunable_fields');
+
+test('should allow the prunable models to be overridden at runtime', function (PrunableUser $model) {
+    Config::resolvePrunableModelsUsing(fn () => [PrunableUser::class]);
+
+    Event::fake();
+
+    pruneFields([]);
+
+    Event::assertDispatched(
+        ModelsFieldsPruned::class,
+        fn (ModelsFieldsPruned $e) => $e->count === 1 && $e->model === PrunableUser::class
+    );
+
+    Config::resolvePrunableModelsUsing(null);
 })->with('user_with_prunable_fields');

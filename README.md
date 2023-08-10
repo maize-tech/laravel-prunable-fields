@@ -1,5 +1,12 @@
 
 # Laravel Prunable Fields
+<p align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="/art/socialcard-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="/art/socialcard-light.png">
+  <img src="/art/socialcard-light.png" alt="Social Card of Laravel Prunable Fields">
+</picture>
+</p>
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/maize-tech/laravel-prunable-fields.svg?style=flat-square)](https://packagist.org/packages/maize-tech/laravel-prunable-fields)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/maize-tech/laravel-prunable-fields/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/maize-tech/laravel-prunable-fields/actions?query=workflow%3Arun-tests+branch%3Amain)
@@ -192,11 +199,11 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 
 ## Contributing
 
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
+Please see [CONTRIBUTING](https://github.com/maize-tech/.github/blob/main/CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
+Please review [our security policy](https://github.com/maize-tech/.github/security/policy) on how to report security vulnerabilities.
 
 ## Credits
 

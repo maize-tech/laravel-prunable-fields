@@ -16,7 +16,7 @@ test('should update mass prunable models', function (MassPrunableUser $model) {
         'last_name' => null,
         'email' => $model->email,
     ]);
-})->with('user_with_mass_prunable_fields', 'user_with_mass_prunable_fields');
+})->with('users_with_mass_prunable_fields');
 
 test('should not update non prunable models', function (MassPrunableUser $model) {
     pruneFields([

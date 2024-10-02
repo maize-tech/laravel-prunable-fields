@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-prunable-fields` will be documented in this file.
 
+## 1.3.0 - 2024-10-02
+
+### What's Changed
+
+* ADD laravel 11 compatibility by @enricodelazzari in https://github.com/maize-tech/laravel-prunable-fields/pull/22
+
 ## 1.2.0 - 2023-02-13
 
 ### What's Changed
